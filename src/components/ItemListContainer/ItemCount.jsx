@@ -1,18 +1,21 @@
 import { useContext, useState } from "react";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import { CartContext } from "../../context/CartContext";
+import { getProductbyId } from "../../services";
 
 const ItemCount = ({productId}) => {
     const [countItem, setCountItem] = useState(1);
 
-    const {count, setCount} = useContext (CartContext);
+    const {count, setCount} = useContext(CartContext);
+
+    const {cartItems, setCartItems} = useContext(CartContext);
 
     const handleAdd = () => {
-        setCountItem ( countItem + 1);
+        setCountItem( countItem + 1);
     };
     
     const handleRemove = () => {
-        setCountItem ( countItem - 1);
+        setCountItem( countItem - 1);
     };
 
     const handleAddProductToCart = () => {
@@ -20,16 +23,26 @@ const ItemCount = ({productId}) => {
 
         if (productExist) {
             setCount (
-                count.map ((item) =>
-                item.id === productId
-                ? {...item, quantity: item.quantity + countItem}
-                : item
+                count.map((item) =>
+                    item.id === productId
+                    ? {...item, quantity: item.quantity + countItem}
+                    : item
                 )
             );
         } else {
-            setCount ([...count, {id: productId, quantity: countItem}]);
+            // setCount ([...count, {id: productId, quantity: countItem}]);
+
+            getProductbyId(productId)
+			.then((res)=>{
+				// debugger
+				setCartItems([...cartItems, res.data]);
+                setCount ([...count, {id: productId, quantity: countItem}]);
+			})
+			.catch((error)=>{
+				console.error(`error: `, error);
+			});
         }
-        setCountItem (1);
+        setCountItem(1);
     };
 
     return (

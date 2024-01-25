@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom';
 import './ItemListContainer.css';
 
 const ItemListContainer = ({ productsData }) => {
+	console.log(`productsData: `, productsData);
+
     return (
         <div className="ItemListContainer">
-            {productsData?.map ((products)=>{
+            {productsData?.map((products)=>{
                 return (
                     <Card key={products.id} style={{ width: '18rem' }}>
                         <Card.Img variant="top" src={ products.thumbnail } />
