@@ -1,0 +1,11 @@
+.cartWidgetContainer {
+    display: flex;
+    width: 35px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartWidgetContainer span {
+    font-weight: bold;
+    font-Size: 1.3rem;
+}
