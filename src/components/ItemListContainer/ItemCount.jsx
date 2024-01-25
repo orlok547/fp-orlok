@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-// import { Button } from "react-bootstrap";
 import { CartContext } from "../../context/CartContext";
 import { getProductbyId } from "../../services";
 
@@ -30,11 +29,8 @@ const ItemCount = ({productId}) => {
                 )
             );
         } else {
-            // setCount ([...count, {id: productId, quantity: countItem}]);
-
             getProductbyId(productId)
 			.then((res)=>{
-				// debugger
 				setCartItems([...cartItems, res.data]);
                 setCount ([...count, {id: productId, quantity: countItem}]);
 			})
