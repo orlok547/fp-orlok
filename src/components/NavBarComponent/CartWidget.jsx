@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import "./CartWidget.css"
 
 const CartWidget = () => {
-    const {count} = useContext (CartContext);
+    const {count} = useContext(CartContext);
 
-    const totalQuantity = count.reduce ((total, item) => total + item.quantity, 0);
+    // const totalQuantity = count.reduce((total, item) => total + item.quantity, 0);
+    const totalQuantity = count.length;
 
     return (
         <Link to={"/Cart"}>
